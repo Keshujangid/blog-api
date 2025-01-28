@@ -6,7 +6,12 @@ const errorHandler = require('./middleware/errorHandler')
 const passport = require('./config/passport')
 const cors = require('cors')
 
-
+const corsOptions = {
+    origin: ['https://keshu-blog-frontend.netlify.app', 'http://localhost:3000'], 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'authorization'],
+    credentials: true,
+  };
 app.use(cors())
 app.use(passport.initialize());
 
