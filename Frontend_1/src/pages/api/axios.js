@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://vercel.com/keshutechies-projects/blog-api', // Adjust baseURL as needed
+  baseURL: 'https://blog-api-tau-gilt.vercel.app', // Adjust baseURL as needed
 });
 
 api.interceptors.request.use((config) => {
