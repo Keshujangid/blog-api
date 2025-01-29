@@ -17,10 +17,30 @@ async function getArticleByAuthor(req,res,next) {
     const postId = req.params.id;
     if(!userId){
         return next(new customError("User not found",404)) 
+      }
+      const post = await query.getArticleByAuthor(postId,userId)
+      if(!post){
+        return next(new customError("Post not found",404))
     }
-    const post = await query.getArticleByAuthor(postId,userId)
     res.send(post);
     
+}
+
+
+async function updatePost(req,res,next){
+  const userId = req.userId;
+  const postId = req.params.id;
+  const post = await query.getArticleByAuthor(postId,userId);
+  if (!post) {
+      return next(new customError("Post not found",404))
+  }
+  const authorId = post.authorId;
+  if (authorId !== userId) {
+      return next(new customError("Unauthorized",401))
+  }
+
+  const result = await query.updatedPost(id,req.body);
+  res.send(result)
 }
 
 async function deleteCommentByAuthor(req,res,next){
@@ -72,5 +92,6 @@ async function deleteCommentByAuthor(req,res,next){
 module.exports = {
     getUserAllPost,
     getArticleByAuthor,
-    deleteCommentByAuthor
+    deleteCommentByAuthor,
+    updatePost
 }

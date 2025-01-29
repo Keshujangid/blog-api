@@ -26,21 +26,7 @@ async function createPost(req,res){
     res.send(result)
 }
 
-async function updatePost(req,res,next){
-    const id = req.params.id;
-    const post = await query.getArticleById(id);
-    if (!post) {
-        return next(new customError("Post not found",404))
-    }
-    const authorId = await query.getAuthorId(id);
-    const {userId} = req;
-    if (authorId !== userId) {
-        return next(new customError("Unauthorized",401))
-    }
 
-    const result = await query.updatedPost(id,req.body);
-    res.send(result)
-}
 
 async function deletePost(req,res){
     const id = req.params.id;
@@ -91,7 +77,6 @@ module.exports = {
     getArticleById,
     getCommentsByArticleId,
     createPost,
-    updatePost,
     deletePost,
     createComment,
     deleteComment,

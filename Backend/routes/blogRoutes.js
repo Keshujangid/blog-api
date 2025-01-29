@@ -7,7 +7,6 @@ const formValidator = require('../middleware/validateData');
 route.get('/posts', apiController.getArticles);
 route.get('/posts/:id', apiController.getArticleById);
 route.post('/posts', auth, formValidator.postValidation, apiController.createPost);
-route.put('/posts/:id', auth, formValidator.postValidation, apiController.updatePost);
 route.delete('/posts/:id', auth, apiController.deletePost);
 
 
@@ -20,5 +19,6 @@ route.delete('/posts/:id/comment/:commentId', auth, apiController.deleteComment)
 
 route.get('/admin/posts', auth, adminController.getUserAllPost)
 route.get('/admin/posts/:id', auth, adminController.getArticleByAuthor)
+route.put('/admin/posts/:id', auth, formValidator.postValidation, adminController.updatePost);
 route.delete('/admin/posts/:id/comment/:commentId', auth, adminController.deleteCommentByAuthor);
 module.exports = route;

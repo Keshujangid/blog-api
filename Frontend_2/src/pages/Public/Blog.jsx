@@ -83,7 +83,7 @@ export const Blog = () => {
         setError(result.error.errors);
         return;
       }
-      await api.put(`/api/posts/${postId}`, {
+      await api.put(`/api/admin/posts/${postId}`, {
         title: blog.title,
         content: editorContentRef.current,
         isPublished: blog.isPublished,
