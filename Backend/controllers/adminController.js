@@ -39,7 +39,7 @@ async function updatePost(req,res,next){
       return next(new customError("Unauthorized",401))
   }
 
-  const result = await query.updatedPost(id,req.body);
+  const result = await query.updatedPost(postId,req.body);
   res.send(result)
 }
 
